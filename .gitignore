@@ -17,5 +17,8 @@
 *.cf
 *.o
 
-# VHDL runtime output
+# VHDL wave output
 *.ghw
+
+# gtkwave view
+*.sav
