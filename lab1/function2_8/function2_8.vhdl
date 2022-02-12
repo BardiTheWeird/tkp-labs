@@ -42,15 +42,6 @@ begin
     val_vector(2) <= c;
     val_vector(3) <= o;
 
-    -- output truth table
-    -- doesn't really work as it prints twice if output changes too
-    -- process (val_vector)
-    --     variable l : line;
-    -- begin
-    --     write (l, val_vector);
-    --     writeline (output, l);
-    -- end process;
-
     F : entity work.f2_8(rtl)
     port map (
         a => a,
