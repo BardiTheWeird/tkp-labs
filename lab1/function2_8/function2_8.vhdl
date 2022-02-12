@@ -1,13 +1,9 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-
 entity f2_8 is
     port (
-        a : in std_logic;
-        b : in std_logic;
-        c : in std_logic;
-        o : out std_logic
+        a : in bit;
+        b : in bit;
+        c : in bit;
+        o : out bit
     );
 end f2_8;
 
@@ -22,26 +18,16 @@ end f2_8_tb;
 
 library std;
 use std.textio.all;
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-use ieee.std_logic_textio.all;
 
 architecture rtl of f2_8_tb is
     constant tick_length : integer := 5;
 
-    signal a : std_logic := '0';
-    signal b : std_logic := '0';
-    signal c : std_logic := '0';
-    signal o : std_logic := '0';
+    signal a : bit := '0';
+    signal b : bit := '0';
+    signal c : bit := '0';
+    signal o : bit := '0';
 
-    signal val_vector : std_logic_vector(0 to 3) := ('0', '0', '0', '0');
 begin
-    val_vector(0) <= a;
-    val_vector(1) <= b;
-    val_vector(2) <= c;
-    val_vector(3) <= o;
-
     F : entity work.f2_8(rtl)
     port map (
         a => a,
