@@ -28,7 +28,7 @@ begin
     clk <= not clk after tick_duration when finished /= true else '0';
 
     process begin
-        wait for clock_phase * 3 / 4;
+        wait for clock_phase / 4;
         while finished /= true loop
             j_k(0) <= not j_k(0);
             wait for clock_phase;
