@@ -9,3 +9,6 @@
 
 # Лабораторна 4
 [Протокол](https://docs.google.com/document/d/1Kd4lqv3ST7jo3SAlg5z-QbOM8EYFWc9R/edit?usp=sharing&ouid=117527334131210020227&rtpof=true&sd=true)
+
+# Лабораторна 5
+[Протокол](https://docs.google.com/document/d/1Ml9xXw_oMxFWErp_Hti9UY6UOc7y9v6TOzJSLS9HAmA/edit?usp=sharing)
