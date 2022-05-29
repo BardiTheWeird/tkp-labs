@@ -1,25 +1,21 @@
 library ieee; 
 use ieee.std_logic_1164.all; 
  
-entity and3_tb is end and3_tb; 
+entity nor_gate_tb is end nor_gate_tb; 
  
-architecture tb of and3_tb is
+architecture tb of nor_gate_tb is
     constant tick_duration : time := 5 us;
     signal finished : boolean := false;
 
-    component and3
-        port(
-            in_vec : in std_logic_vector(0 to 2);
-            o : out std_logic
-        );  
-    end component;
-    
     signal in_vec : std_logic_vector(0 to 2) := (others => '0');
     signal o : std_logic;
 begin 
   
     -- Unit Under Test port map 
-    UUT : and3
+    UUT : entity work.nor_gate(rtl)
+    generic map (
+        width => 3
+    )
     port map (
         in_vec => in_vec, 
         o => o
@@ -31,12 +27,12 @@ begin
 
     process begin
         wait for 1 us;
+        assert(o='1') report "Fail 1" severity error;            
+        wait for tick_duration;
         for i in 0 to 6 loop
             assert(o='0') report "Fail 0" severity error;            
             wait for tick_duration;
         end loop;
-        assert(o='1') report "Fail 1" severity error;
-        wait for tick_duration;
 
         finished <= true;
         assert false report "Test done" severity note;
@@ -44,10 +40,3 @@ begin
     end process;
 end tb; 
  
-configuration and3_tb_conf of and3_tb is
-    for tb
-        for UUT : and3
-            use entity work.and3(rtl);
-        end for;
-    end for; 
-end and3_tb_conf;

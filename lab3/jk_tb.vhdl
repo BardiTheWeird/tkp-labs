@@ -8,16 +8,6 @@ architecture tb of jk_tb is
     constant clock_phase : time := tick_duration * 2;
     signal finished : boolean := false;
 
-    component jk
-        port(
-            pr_clr : in std_logic_vector(0 to 1);
-            j_k : in std_logic_vector(0 to 1);
-            clk : in std_logic;
-            Q : out std_logic;
-            Q_inv : out std_logic
-        );  
-    end component;
-    
     signal pr_clr : std_logic_vector(0 to 1) := (others => '0');
     signal j_k : std_logic_vector(0 to 1) := (others => '0');
     signal clk : std_logic := '0';
@@ -26,7 +16,7 @@ architecture tb of jk_tb is
 begin 
   
     -- Unit Under Test port map 
-    UUT : jk
+    UUT : entity work.jk(rtl)
     port map (
         pr_clr => pr_clr,
         j_k => j_k,
@@ -77,10 +67,3 @@ begin
     end process;
 end tb; 
  
-configuration jk_tb_conf of jk_tb is
-    for tb
-        for UUT : jk
-            use entity work.jk(rtl);
-        end for;
-    end for; 
-end jk_tb_conf;

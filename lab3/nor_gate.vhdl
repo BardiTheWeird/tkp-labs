@@ -2,14 +2,17 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_misc.all;
 
-entity nor3 is
+entity nor_gate is
+	generic (
+		width : integer
+	);
 	port (
-		in_vec : in std_logic_vector(0 to 2);
+		in_vec : in std_logic_vector(0 to width-1);
 		o : out std_logic
 	);
-end nor3;
+end nor_gate;
 
-architecture rtl of nor3 is
+architecture rtl of nor_gate is
 begin
     o <= not or_reduce(in_vec);
 end architecture;

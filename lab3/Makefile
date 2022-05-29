@@ -10,7 +10,7 @@ GHDLFLAGS=
 all: jk_tb
 
 # Elaboration target
-jk_tb: /usr/lib/ghdl/ieee/v93/std_logic_1164.o /usr/lib/ghdl/ieee/v93/std_logic_1164-body.o /usr/lib/ghdl/ieee/v93/std_logic_misc.o /usr/lib/ghdl/ieee/v93/std_logic_misc-body.o and3.o and2.o nor3.o jk.o jk_tb.o
+jk_tb: /usr/lib/ghdl/ieee/v93/std_logic_1164.o /usr/lib/ghdl/ieee/v93/std_logic_1164-body.o inv.o /usr/lib/ghdl/ieee/v93/std_logic_misc.o /usr/lib/ghdl/ieee/v93/std_logic_misc-body.o and_gate.o nor_gate.o jk.o jk_tb.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
 # Run target
@@ -24,30 +24,30 @@ run: jk_tb
 /usr/lib/ghdl/ieee/v93/std_logic_1164-body.o: /usr/lib/ghdl/ieee/v93/../../src/ieee/v93/std_logic_1164-body.vhdl
 	@echo "This file was not locally built ($<)"
 	exit 1
+inv.o: ./inv.vhdl
+	$(GHDL) -a $(GHDLFLAGS) $<
 /usr/lib/ghdl/ieee/v93/std_logic_misc.o: /usr/lib/ghdl/ieee/v93/../../src/synopsys/std_logic_misc.vhdl
 	@echo "This file was not locally built ($<)"
 	exit 1
 /usr/lib/ghdl/ieee/v93/std_logic_misc-body.o: /usr/lib/ghdl/ieee/v93/../../src/synopsys/std_logic_misc-body.vhdl
 	@echo "This file was not locally built ($<)"
 	exit 1
-and3.o: and3.vhdl
+and_gate.o: ./and_gate.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
-and2.o: and2.vhdl
+nor_gate.o: ./nor_gate.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
-nor3.o: nor3.vhdl
+jk.o: ./jk.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
-jk.o: jk.vhdl
-	$(GHDL) -a $(GHDLFLAGS) $<
-jk_tb.o: jk_tb.vhdl
+jk_tb.o: ./jk_tb.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
 
 # Files dependences
 /usr/lib/ghdl/ieee/v93/std_logic_1164.o: 
 /usr/lib/ghdl/ieee/v93/std_logic_1164-body.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o
+inv.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o
 /usr/lib/ghdl/ieee/v93/std_logic_misc.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o
 /usr/lib/ghdl/ieee/v93/std_logic_misc-body.o:  /usr/lib/ghdl/ieee/v93/std_logic_misc.o
-and3.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o /usr/lib/ghdl/ieee/v93/std_logic_misc.o /usr/lib/ghdl/ieee/v93/std_logic_misc-body.o
-and2.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o /usr/lib/ghdl/ieee/v93/std_logic_misc.o
-nor3.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o /usr/lib/ghdl/ieee/v93/std_logic_misc.o
-jk.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o and3.o and2.o nor3.o
+and_gate.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o /usr/lib/ghdl/ieee/v93/std_logic_misc.o /usr/lib/ghdl/ieee/v93/std_logic_misc-body.o
+nor_gate.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o /usr/lib/ghdl/ieee/v93/std_logic_misc.o
+jk.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o inv.o and_gate.o nor_gate.o
 jk_tb.o:  /usr/lib/ghdl/ieee/v93/std_logic_1164.o /usr/lib/ghdl/ieee/v93/std_logic_1164-body.o jk.o
